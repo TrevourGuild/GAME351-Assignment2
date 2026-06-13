@@ -9,7 +9,9 @@ public class Movement : MonoBehaviour
     public float hoverHeight = 10f;
     public float tiltStrengthMultiplier = 5f; // Lower is better for this variable, otherwise we may sample the wrong spot when we go over sharp hills which causes graphical issues
     public float tiltDistanceCheck = 6f; // Lower is better for this variable, otherwise we may sample the wrong spot when we go over sharp hills which causese graphical issues
-   
+    
+    public AudioSource engineAudio; // Creating audio source for the engine hum
+
     void Start()
     {
     }
@@ -20,6 +22,15 @@ public class Movement : MonoBehaviour
 
         float move = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         float turn = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+
+        // Mathf.Abs turns negative backward inputs into positive numbers
+        float currentInput = Mathf.Abs(Input.GetAxis("Vertical")); 
+
+// Base pitch is 1. We add up to 0.5 to the pitch when moving at full speed.
+if (engineAudio != null) 
+{
+            engineAudio.pitch = 1f + (currentInput * 0.5f); 
+}
 
 //if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
         {
