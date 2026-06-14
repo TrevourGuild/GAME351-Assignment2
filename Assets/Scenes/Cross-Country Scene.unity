@@ -1474,9 +1474,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 100
   turnSpeed: 80
-  hoverHeight: 10
-  tiltStrengthMultiplier: 5
-  tiltDistanceCheck: 6
+  hoverHeight: 11
+  tiltStrengthForwardBackward: 7
+  tiltDistanceCheckForwardBackward: 6
+  tiltStrengthLeftRight: 9
+  tiltDistanceCheckLeftRight: 5
   engineAudio: {fileID: 2053439286}
 --- !u!1 &1973049471 stripped
 GameObject:
@@ -1632,8 +1634,10 @@ MonoBehaviour:
   moveSpeed: 15
   turnSpeed: 80
   hoverHeight: 2
-  tiltStrengthMultiplier: 5
-  tiltDistanceCheck: 6
+  tiltStrengthForwardBackward: 5
+  tiltDistanceCheckForwardBackward: 6
+  tiltStrengthLeftRight: 5
+  tiltDistanceCheckLeftRight: 6
   engineAudio: {fileID: 0}
 --- !u!1 &2053439285 stripped
 GameObject:
