@@ -1,69 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class CameraIdleFix : MonoBehaviour
 {
-    public float moveSpeed = 200f;
-    public float turnSpeed = 80f;
-    public float hoverHeight = 11f;
+    public float lockedHeight = 11f;
+
+
+
+
     public float tiltStrengthForwardBackward = 7f; 
     public float tiltDistanceCheckForwardBackward = 6f; 
     public float tiltStrengthLeftRight = 9f; 
     public float tiltDistanceCheckLeftRight = 5f; 
-    UnityEngine.Vector3 previousLocation;
+    
+
+
+
+    /*UnityEngine.Vector3 previousLocation;
     UnityEngine.Vector3 idleStartPosition;
     public float idleFrequency = 100f;
     float idleMagnitude = 0.25f;
-    bool startPositionSet = false;
-    
-    //public GameObject gameManager;
-    
-     
-    public AudioSource engineAudio; // Creating audio source for the engine hum
+    bool startPositionSet = false;*/
 
+    // Start is called before the first frame update
     void Start()
     {
         
     }
-   
+
+    // Update is called once per frame
     void Update()
     {
-        
-        //if (this == gameManager.activeVehicle)
-        {
         Terrain terrain = Terrain.activeTerrain;
-
-        float move = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        float turn = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
-
-        // Mathf.Abs turns negative backward inputs into positive numbers
-        float currentInput = Mathf.Abs(Input.GetAxis("Vertical")); 
-
-// Base pitch is 1. We add up to 0.5 to the pitch when moving at full speed.
-if (engineAudio != null) 
-{
-            engineAudio.pitch = 1f + (currentInput * 0.5f); 
-}
-
-        // W/S movement
-        transform.Translate(0, 0, move);
-
-        // A/D turning
-        transform.Rotate(0, turn, 0);
-
-        if (terrain != null)
-        {
-            // Keep hovercraft above terrain
-                UnityEngine.Vector3 position = transform.position;
-                float groundHeight = terrain.SampleHeight(position);
-
-                position.y = groundHeight + hoverHeight;
-
-                transform.position = position;
-
-            // Sample and set the slope of the hovercraft to the slope of the terrain below the hovercraft
+        UnityEngine.Vector3 position = transform.position;
+        
+        // Sample and set the slope of the hovercraft to the slope of the terrain below the hovercraft
 
                 // Set local variables needed for determining slope below hovercraft
                 float _moveCheckForwardDistance = 2;
@@ -95,29 +67,50 @@ if (engineAudio != null)
                 currentAngles.z = _groundSlopeLR * tiltStrengthLeftRight * -isFacingWorldForward; 
              
                 // Set our hovercraft to the modified currentAngles variable
-                transform.eulerAngles = currentAngles;
+
                 
-                // Determines if we are idle, idle = true
-                if (currentAngles == previousLocation)
+
+                transform.eulerAngles = currentAngles;
+        
+        
+                Vector3 currentPos = transform.position;
+
+                currentPos.y = lockedHeight;
+
+                transform.position = currentPos;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+        /*
+        UnityEngine.Vector3 currentAngles = transform.eulerAngles;
+
+        if (currentAngles == previousLocation)
                 {
                     if (!startPositionSet)
                     {
                         startPositionSet = true;
                         idleStartPosition = transform.position;
                     }
-                    float idleMovement = Mathf.Sin(Time.time * idleFrequency) * idleMagnitude;
+                    float idleMovement = -Mathf.Sin(Time.time * idleFrequency) * idleMagnitude;
                     transform.position = idleStartPosition + new UnityEngine.Vector3(0, idleMovement, 0);
                 }
                 previousLocation = currentAngles;
-                startPositionSet = false;  
-
-        }
-        
-        
-
-
-        }
-
-
+                startPositionSet = false;
+                */
     }
 }

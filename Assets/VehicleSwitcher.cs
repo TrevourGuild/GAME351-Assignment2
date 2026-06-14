@@ -4,6 +4,7 @@ public class VehicleSwitcher : MonoBehaviour
 {
     // This creates an array (a list) in the Inspector where you can drag your 3 cars
     public GameObject[] vehicles; 
+    public GameObject activeVehicle;
 
     void Start()
     {
@@ -14,9 +15,25 @@ public class VehicleSwitcher : MonoBehaviour
     void Update()
     {
         // Press the 1, 2, or 3 keys on your keyboard to switch cars
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchVehicle(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchVehicle(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchVehicle(2);
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            SwitchVehicle(0);
+            vehicles[1].SetActive(false);
+            vehicles[2].SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            SwitchVehicle(1);
+            vehicles[0].SetActive(false);
+            vehicles[2].SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) 
+        {
+            SwitchVehicle(2);
+            vehicles[1].SetActive(false);
+            vehicles[0].SetActive(false);
+        }
     }
 
     // The function that does the actual swapping
@@ -28,6 +45,11 @@ public class VehicleSwitcher : MonoBehaviour
             // If the car's number matches the key we pressed, turn it ON (true). 
             // If it doesn't match, turn it OFF (false).
             vehicles[i].SetActive(i == index);
+            activeVehicle = vehicles[index];
+            //if (vehicles[i].Active)
+            {
+                //Debug.Log("" + i + "");
+            }
         }
     }
 }
