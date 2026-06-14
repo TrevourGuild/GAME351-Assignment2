@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -909,7 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b397197f015549b4f9a0bae7b7f2f5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
+  moveSpeed: 150
   turnSpeed: 80
   hoverHeight: 10
   tiltStrengthForwardBackward: 7
@@ -987,15 +987,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4401185589141230, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.85
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4401185589141230, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.85
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4401185589141230, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.85
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4401185589141230, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1035,6 +1035,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4401185589141230, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401185589141230, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8249392007165130105, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
@@ -1094,8 +1098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b397197f015549b4f9a0bae7b7f2f5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
-  turnSpeed: 80
+  moveSpeed: 80
+  turnSpeed: 150
   hoverHeight: 10
   tiltStrengthForwardBackward: 7
   tiltDistanceCheckForwardBackward: 6
@@ -1341,7 +1345,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1350,7 +1354,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1549,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
-  turnSpeed: 80
+  turnSpeed: 100
   hoverHeight: 11
   tiltStrengthForwardBackward: 7
   tiltDistanceCheckForwardBackward: 6
@@ -1571,6 +1575,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 1613298694}
   firePoint: {fileID: 366337880}
   laserSpeed: 250
+  fireRate: 0.05
 --- !u!1 &1973049471 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1825840288460834, guid: 39a51a23038574b49a593e57bb84807b, type: 3}
@@ -1828,11 +1833,6 @@ MonoBehaviour:
   tiltStrengthLeftRight: 5
   tiltDistanceCheckLeftRight: 6
   engineAudio: {fileID: 0}
---- !u!1 &2053439285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1028590976956288, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
-  m_PrefabInstance: {fileID: 1522369321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &2053439286 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8249392007165130105, guid: 5d68a55fb8691f74dbda8f0e7d28977e, type: 3}
@@ -1868,9 +1868,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicles:
-  - {fileID: 2053439285}
-  - {fileID: 1973049471}
-  - {fileID: 591285416}
+  - {fileID: 1963364897}
+  - {fileID: 1185259962}
+  - {fileID: 1540165550}
 --- !u!4 &2098590515
 Transform:
   m_ObjectHideFlags: 0
