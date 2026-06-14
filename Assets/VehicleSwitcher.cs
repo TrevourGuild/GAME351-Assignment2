@@ -1,10 +1,13 @@
 using UnityEngine;
+using Cinemachine;
 
 public class VehicleSwitcher : MonoBehaviour
 {
     // This creates an array (a list) in the Inspector where you can drag your 3 cars
     public GameObject[] vehicles; 
-    public GameObject activeVehicle;
+    [SerializeField] CinemachineVirtualCamera Cam1;
+    [SerializeField] CinemachineVirtualCamera Cam2;
+    [SerializeField] CinemachineVirtualCamera Cam3;
 
     void Start()
     {
@@ -19,20 +22,34 @@ public class VehicleSwitcher : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
             SwitchVehicle(0);
-            vehicles[1].SetActive(false);
-            vehicles[2].SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             SwitchVehicle(1);
-            vehicles[0].SetActive(false);
-            vehicles[2].SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) 
         {
             SwitchVehicle(2);
-            vehicles[1].SetActive(false);
-            vehicles[0].SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Cam1.m_Priority = 5;
+            Cam2.m_Priority = 0;
+            Cam3.m_Priority = 0;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2)) 
+         {
+            Cam1.m_Priority = 0;
+            Cam2.m_Priority = 5;
+            Cam3.m_Priority = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) 
+         {
+            Cam1.m_Priority = 0;
+            Cam2.m_Priority = 0;
+            Cam3.m_Priority = 5;
         }
     }
 
@@ -45,7 +62,7 @@ public class VehicleSwitcher : MonoBehaviour
             // If the car's number matches the key we pressed, turn it ON (true). 
             // If it doesn't match, turn it OFF (false).
             vehicles[i].SetActive(i == index);
-            activeVehicle = vehicles[index];
+            
             //if (vehicles[i].Active)
             {
                 //Debug.Log("" + i + "");
