@@ -5,6 +5,8 @@ public class VehicleSwitcher : MonoBehaviour
 {
     // This creates an array (a list) in the Inspector where you can drag your 3 cars
     public GameObject[] vehicles; 
+    public int currentVehicleNum;
+    // Virtual camera references
     [SerializeField] CinemachineVirtualCamera Cam1;
     [SerializeField] CinemachineVirtualCamera Cam2;
     [SerializeField] CinemachineVirtualCamera Cam3;
@@ -13,6 +15,7 @@ public class VehicleSwitcher : MonoBehaviour
     {
         // When the game starts, make sure only the first car (Index 0) is turned on
         SwitchVehicle(0);
+        currentVehicleNum = 0;
     }
 
     void Update()
@@ -22,16 +25,31 @@ public class VehicleSwitcher : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
             SwitchVehicle(0);
+            currentVehicleNum = 0;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             SwitchVehicle(1);
+            currentVehicleNum = 1;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) 
         {
             SwitchVehicle(2);
+            currentVehicleNum = 2;
         }
 
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (currentVehicleNum + 1 == 3)
+            {
+                currentVehicleNum = -1;
+            }
+            SwitchVehicle(currentVehicleNum + 1);
+            currentVehicleNum++;
+
+        }
+
+        // Switches the active virtual camera depending on which vehicle is active.
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Cam1.m_Priority = 5;
@@ -46,6 +64,25 @@ public class VehicleSwitcher : MonoBehaviour
             Cam3.m_Priority = 0;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) 
+         {
+            Cam1.m_Priority = 0;
+            Cam2.m_Priority = 0;
+            Cam3.m_Priority = 5;
+        }
+        if (currentVehicleNum == 0)
+        {
+            Cam1.m_Priority = 5;
+            Cam2.m_Priority = 0;
+            Cam3.m_Priority = 0;
+        }
+        
+        if (currentVehicleNum == 1) 
+         {
+            Cam1.m_Priority = 0;
+            Cam2.m_Priority = 5;
+            Cam3.m_Priority = 0;
+        }
+        if (currentVehicleNum == 2) 
          {
             Cam1.m_Priority = 0;
             Cam2.m_Priority = 0;
