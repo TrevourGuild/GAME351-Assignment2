@@ -9,13 +9,20 @@ public class VehicleSwitcher : MonoBehaviour
     // Virtual camera references
     [SerializeField] CinemachineVirtualCamera Cam1;
     [SerializeField] CinemachineVirtualCamera Cam2;
-    [SerializeField] CinemachineVirtualCamera Cam3;
+    [SerializeField] CinemachineVirtualCamera Cam3;    
+    GameObject currentActiveHoverCraft;
+    Vector3 spawnPoint = new Vector3(500, 60, 415);
+    private CinemachineTransposer transposer;
+
 
     void Start()
     {
         // When the game starts, make sure only the first car (Index 0) is turned on
-        SwitchVehicle(0);
-        currentVehicleNum = 0;
+        Cam1.m_Priority = 5;
+        Cam2.m_Priority = 0;
+        Cam3.m_Priority = 0;
+        SpawnNewVehicle(0);
+        ResetCameraToTargetBack(Cam1);
     }
 
     void Update()
@@ -24,18 +31,15 @@ public class VehicleSwitcher : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
-            SwitchVehicle(0);
-            currentVehicleNum = 0;
+            SpawnNewVehicle(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
-            SwitchVehicle(1);
-            currentVehicleNum = 1;
+            SpawnNewVehicle(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) 
         {
-            SwitchVehicle(2);
-            currentVehicleNum = 2;
+            SpawnNewVehicle(2);
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -55,6 +59,9 @@ public class VehicleSwitcher : MonoBehaviour
             Cam1.m_Priority = 5;
             Cam2.m_Priority = 0;
             Cam3.m_Priority = 0;
+
+            ResetCameraToTargetBack(Cam1);
+
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
@@ -62,18 +69,24 @@ public class VehicleSwitcher : MonoBehaviour
             Cam1.m_Priority = 0;
             Cam2.m_Priority = 5;
             Cam3.m_Priority = 0;
+
+            ResetCameraToTargetBack(Cam2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) 
          {
             Cam1.m_Priority = 0;
             Cam2.m_Priority = 0;
             Cam3.m_Priority = 5;
+
+            ResetCameraToTargetBack(Cam3);
         }
         if (currentVehicleNum == 0)
         {
             Cam1.m_Priority = 5;
             Cam2.m_Priority = 0;
             Cam3.m_Priority = 0;
+
+            ResetCameraToTargetBack(Cam1);
         }
         
         if (currentVehicleNum == 1) 
@@ -81,12 +94,16 @@ public class VehicleSwitcher : MonoBehaviour
             Cam1.m_Priority = 0;
             Cam2.m_Priority = 5;
             Cam3.m_Priority = 0;
+
+            ResetCameraToTargetBack(Cam2);
         }
         if (currentVehicleNum == 2) 
          {
             Cam1.m_Priority = 0;
             Cam2.m_Priority = 0;
             Cam3.m_Priority = 5;
+
+            ResetCameraToTargetBack(Cam3);
         }
     }
 
@@ -94,16 +111,33 @@ public class VehicleSwitcher : MonoBehaviour
     void SwitchVehicle(int index)
     {
         // Loop through all the cars in the list
-        for (int i = 0; i < vehicles.Length; i++)
+        //for (int i = 0; i < vehicles.Length; i++)
         {
             // If the car's number matches the key we pressed, turn it ON (true). 
             // If it doesn't match, turn it OFF (false).
-            vehicles[i].SetActive(i == index);
+            //vehicles[i].SetActive(i == index);
             
-            //if (vehicles[i].Active)
+            //if (i == index)
             {
                 //Debug.Log("" + i + "");
             }
         }
+    }
+
+    void SpawnNewVehicle(int index)
+    {
+        SwitchVehicle(index);
+        currentVehicleNum = index;
+
+        Destroy(currentActiveHoverCraft);
+        currentActiveHoverCraft = Instantiate(vehicles[index], spawnPoint, Quaternion.identity);
+    }
+
+    void ResetCameraToTargetBack(CinemachineVirtualCamera cam)
+    {
+        cam.Follow = currentActiveHoverCraft.transform;
+        cam.LookAt = currentActiveHoverCraft.transform;
+        transposer = cam.GetCinemachineComponent<CinemachineTransposer>();
+        transposer.m_FollowOffset = new Vector3(0f, 20f, -53f);
     }
 }
