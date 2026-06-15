@@ -48,8 +48,10 @@ public class VehicleSwitcher : MonoBehaviour
             {
                 currentVehicleNum = -1;
             }
-            SwitchVehicle(currentVehicleNum + 1);
             currentVehicleNum++;
+            SpawnNewVehicle(currentVehicleNum);
+            
+            
 
         }
 
