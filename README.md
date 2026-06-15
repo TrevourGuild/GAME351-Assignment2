@@ -72,6 +72,7 @@ The following assets/packages were used in this project:
 | WASD | Move Hovercraft | Rotate Hovercraft |
 | "1", "2", "3" | Select a specific hovercraft |
 | "C" | Cycle through hovercraft options |
+| "spacebar" | Shoot Lazer |
 
 ---
 
